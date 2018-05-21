@@ -26,7 +26,7 @@ class FIG_GEO {
 	public:
 		virtual float gPerimetro();
 		virtual float gArea();
-		int gRazon();
+		int gRazon(){ return gArea()/gPerimetro();}
 		
 };
 
@@ -34,6 +34,8 @@ class Punto : public FIG_GEO {
 			
 	public:
 		Punto(int x, int y):FIG_GEO(x, y){};	
+		float gPerimetro(){ return 0;}
+		float gArea(){ return 1;}
 };
 
 class Circulo : public FIG_GEO {
@@ -43,6 +45,8 @@ class Circulo : public FIG_GEO {
 		
 	public:
 		Circulo(int, int, int);
+		float gPerimetro();
+		float gArea();
 };
 
 Circulo::Circulo(int _x, int _y, int _r){	
@@ -66,7 +70,9 @@ class Poligono : public FIG_GEO {
 		int largo;
 		
 	public:
-		Poligono(int, int, int, int);		
+		Poligono(int, int, int, int);	
+		float gPerimetro();
+		float gArea();
 };
 
 Poligono::Poligono(int _x, int _y, int _n, int _l){	
