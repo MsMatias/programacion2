@@ -12,7 +12,7 @@ formula para calcular su perimetro y su area.
 Es posible definir tambien la razon superficie/perimetro.
 Teniendo en cuenta estas cosideraciones obtenga un mecanismo de herencia que a
 partir de una clase abstracta FIG_GEO permita generar las clases derivadas para
-representar un punto, un círculo y un poligono regular.
+representar un punto, un cÃ­rculo y un poligono regular.
 Realice las pruebas de las clases creadas mediante un programa principal. */
 
 using namespace std;
@@ -24,35 +24,17 @@ class FIG_GEO {
 		int y;
 		
 	public:
-		int gPerimetro();
-		int gArea();
+		virtual float gPerimetro();
+		virtual float gArea();
+		int gRazon();
 		
 };
 
-class Cuadrado : public FIG_GEO {
-	
-	private:
-		int lado;
-		
+class Punto : public FIG_GEO {
+			
 	public:
-		Cuadrado(int, int, int);
-		int gPerimetro();
-		int gArea();		
+		Punto(int x, int y):FIG_GEO(x, y){};	
 };
-
-Cuadrado::Cuadrado(int _x, int _y, int _l){	
-	x = _x;
-	y = _y;
-	lado = _l;		
-}
-
-int Cuadrado::gPerimetro(){
-	return 4*lado;
-}
-
-int Cuadrado::gArea(){
-	return lado*lado;
-}
 
 class Circulo : public FIG_GEO {
 	
@@ -61,8 +43,6 @@ class Circulo : public FIG_GEO {
 		
 	public:
 		Circulo(int, int, int);
-		int gPerimetro();
-		int gArea();
 };
 
 Circulo::Circulo(int _x, int _y, int _r){	
@@ -71,11 +51,11 @@ Circulo::Circulo(int _x, int _y, int _r){
 	radio = _r;		
 }
 
-int Circulo::gPerimetro(){
+float Circulo::gPerimetro(){
 	return M_PI*2*radio;
 }
 
-int Circulo::gArea(){
+float Circulo::gArea(){
 	return M_PI*(radio*radio);
 }
 
@@ -86,9 +66,7 @@ class Poligono : public FIG_GEO {
 		int largo;
 		
 	public:
-		Poligono(int, int, int, int);
-		int gPerimetro();
-		int gArea();		
+		Poligono(int, int, int, int);		
 };
 
 Poligono::Poligono(int _x, int _y, int _n, int _l){	
@@ -98,11 +76,11 @@ Poligono::Poligono(int _x, int _y, int _n, int _l){
 	largo = _l;		
 }
 
-int Poligono::gPerimetro(){
+float Poligono::gPerimetro(){
 	return lados*largo;
 }
 
-int Poligono::gArea(){
+float Poligono::gArea(){
 	int angulo = (360/lados)/2;	
 	double radianes = angulo * (M_PI/180);
 	int perimetro = lados*largo;
@@ -115,11 +93,9 @@ int Poligono::gArea(){
 
 int main() {
 	
-	Cuadrado cuad(0, 0, 2);
 	Circulo circ(0, 0, 10);
 	Poligono poli(0, 0, 5, 2);
 	
-	cout<<"Perimetro del cuadrado: "<<cuad.gPerimetro()<<", Area del cuadrado: "<<cuad.gArea()<<endl;
 	cout<<"Perimetro del circulo: "<<circ.gPerimetro()<<", Area del circulo: "<<circ.gArea()<<endl;
 	cout<<"Perimetro del poligono: "<<poli.gPerimetro()<<", Area del poligono: "<<poli.gArea()<<endl;
 					
