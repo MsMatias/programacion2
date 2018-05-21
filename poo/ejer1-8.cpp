@@ -50,7 +50,7 @@ class Circulo : public FIG_GEO {
 };
 
 Circulo::Circulo(int _x, int _y, int _r){	
-	FIG_GEO(x, y);
+	FIG_GEO(_x, _y);
 	radio = _r;		
 }
 
@@ -75,7 +75,7 @@ class Poligono : public FIG_GEO {
 };
 
 Poligono::Poligono(int _x, int _y, int _n, int _l){	
-	FIG_GEO(x, y);
+	FIG_GEO(_x, _y);
 	lados = _n;	
 	largo = _l;		
 }
