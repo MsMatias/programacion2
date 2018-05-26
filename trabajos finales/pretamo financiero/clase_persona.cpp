@@ -21,8 +21,8 @@ class persona{
 		void sDNI(int);
 		void sNombre(const char* p);
 		void sApellido(const char* p);
-		//void stel_fijo(int);
-		//void stel_movil(int);
+		void stel_fijo(int);
+		void stel_movil(int);
 		
 		int gDNI();
 		char* gNombre();
@@ -54,11 +54,17 @@ void persona::sApellido(const char* p){
 	}
 }
 
-/*
 void persona::stel_fijo(int fijo){
 	int tel_fijo = fijo;
-}*/
+}
 
+void persona::stel_movil(int movil){
+	int tel_movil = movil;
+}
+
+/*int persona::gDNI(int _dni){
+	return _dni;
+}*/
 
 char* persona::gNombre(){
 	return Nombre;
@@ -75,7 +81,6 @@ int persona::gtel_fijo(){
 int persona::gtel_movil(){
 	return tel_movil;
 }
-
 
 
 
