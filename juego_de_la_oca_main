@@ -1,0 +1,195 @@
+#include <iostream>
+#include <stdlib.h> 
+#include <stdio.h> 
+#include <time.h> 
+#include <conio.h>
+#include <string>
+
+using namespace std;
+
+char* leer(){
+	
+	char caracter;
+	char* entrada;
+	int c = 0;
+	
+	entrada = new char[8];
+	
+	do{		
+		if(caracter = getche()){
+			if(caracter != 13){
+				*(entrada + c) = caracter;
+				c++;
+			}			
+		}		
+	}while(caracter != 13);	
+	
+	return entrada;
+}
+
+//CLASE CELDA
+class celdas{
+	private:
+		int accion;
+		
+	public:
+		celdas(){};
+		void sAccion(int);
+		int gAccion();
+};
+
+void celdas::sAccion(int a){
+	accion = a;
+}
+
+int celdas::gAccion(){
+ return accion;
+}
+
+//CLASE OCA
+class oca {
+	
+	private:
+		celdas* celdasOca; //Puntero de tipo int para guardar las celdas del tablero con sus respectivas acciones
+		int nCeldas; //Cantindad de celdas
+		int nJugadores; //Cantidad de jugadores
+		//jugador* jugadores; //Puntero de tipo jugador para guardar los jugadores del juego
+		
+	public:	
+		oca(){};	
+		oca(int);
+		int iniciarJugadores(int);
+		int imprimir();
+		int operator[](int);		
+
+};
+
+oca::oca(int c){
+	
+	if(c > 0){
+	
+	/* Inicializamos random */
+	srand(time(NULL));
+	
+	int random;
+
+	/* Guardamos la cantidad de celdas del tablero */
+	nCeldas = c;	
+	
+	/* Asignamos espacio de memoria a celdas */
+	celdasOca = new celdas[nCeldas];	
+	
+	for(int i = 0; i < nCeldas; i++){
+		random = rand() % 8 - 3;
+		celdasOca[i].sAccion(random);
+	}
+	
+	cout<<"Se creo el tablero con "<<nCeldas<<" celdas"<<endl;	
+	
+	}else{
+		cout<<"Debe ser un numero mayor a 0";
+	}
+		
+}
+
+int oca::iniciarJugadores(int j){
+	if(j > 1){
+		
+		char nombre[10];
+		nJugadores = j;		
+		//jugadores = new jugador[nJugadores];
+		
+		for(int i = 0; i < nJugadores; i++){
+			cout<<"Ingrese el nombre del jugador N"<<(i+1)<<": "<<endl;
+			cout<<leer();
+			//jugadores[i].sNombre(nombre);
+		}
+		
+		cout<<" Todos los jugadores definidos!"<<endl;
+		
+	}else{
+		cout<<"Debe ser un numero mayor a 1";
+	}
+}
+
+int oca::imprimir(){	
+	
+	if(nCeldas < 3){
+		cout<<"Debe definir las celdas antes de imprimir"<<endl;
+		return 0;
+	}
+	
+	if(nJugadores < 2){
+		cout<<"Debe definir al menos 2 jugadores"<<endl;
+		return 0;
+	}
+	
+	system("CLS");
+	
+	cout<<"============================"<<endl;
+	cout<<"==== Tabla de jugadores ===="<<endl;
+	cout<<"============================"<<endl<<endl;
+	
+	for(int i = 0; i << nJugadores; i++){
+		//cout<<(i+1)<<"º)- "<<jugadores[i].gNombre()<<endl;
+	}
+	
+	cout<<endl;
+	
+	cout<<"=========================="<<endl;
+	cout<<"==== Tablero de juego ===="<<endl;
+	cout<<"=========================="<<endl<<endl;
+	
+	for(int i = 0; i < nCeldas; i++){
+		for(int j = 0; j < nJugadores; j++){
+			cout<<(j+1)<<" ";
+		}
+		cout<<" | ";
+	}
+	
+	cout<<endl;
+	
+	return 1;
+}
+
+int oca::operator[](int i){	
+	if(i < nCeldas){
+		return celdasOca[i].gAccion();
+	}
+}
+
+int main(int argc, char** argv) {
+	
+	int c,j;
+	
+	system("color 17");
+	
+	cout<<"========================================"<<endl;
+	cout<<"==== Bienvenidos al juego de la OCA ===="<<endl;
+	cout<<"========================================"<<endl<<endl;	
+	
+	do{	
+		cout <<'\r';
+		cout<<"Ingrese la cantidad de celdas que va a tener el tablero: ";
+		cin>>c;
+	}while(c < 2 || c > 20);
+	
+	cout << "%" << '\r';
+				
+	oca juego(c);
+	
+	do{	
+		cout <<'\r';
+		cout<<"Ingrese la cantidad de jugadores (minimo 2): ";
+		cin>>j;
+	}while(j < 2 || j > 5);
+	
+	cout << "%" << '\r';
+	
+	juego.iniciarJugadores(j);
+	
+	juego.imprimir();
+	
+	system("PAUSE");
+	return 0;
+}
