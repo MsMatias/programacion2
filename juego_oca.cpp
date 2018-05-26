@@ -9,22 +9,23 @@ que tenga un constructor que la pida el nombre,
 #include<iostream>
 #include<conio.h>
 #include <string.h>
+#include<time.h>
+#include<stdlib.h>
 
 using namespace std;
 
 class jugador{
 	private:
 		char *nombre;
-		int numJugador;	
+		
 		
 	public:
 		jugador();
 		void sNombre(const char* );
-		
-	//	int jugar(int tirarDado, int moverCasilla);
-	//	string nombre(string nombreJugador);
-	//	int numJugador();
-	//	int posTablero();
+		int jugar();
+		int sPosicion();
+	//	char nombre(char nombreJugador);
+	
 		
 };
 
@@ -38,7 +39,15 @@ void jugador::sNombre(const char* _nombre){
 	}
 }
 
+int jugador::jugar(){
+	int valor = rand() % 6 + 1;
+	return valor;
+}
 
+
+int jugador::sPosicion(){
+		
+}
 
 
 
