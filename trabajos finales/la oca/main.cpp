@@ -79,7 +79,7 @@ class celdas{
 		int accion;
 		
 	public:
-		celdas(){};
+		celdas(){ accion = 0; };
 		void sAccion(int);
 		int gAccion();
 };
@@ -125,7 +125,7 @@ oca::oca(int c){
 	celdasOca = new celdas[nCeldas];	
 	
 	/* Asignamos a cada celda una accion */
-	for(int i = 0; i < nCeldas; i++){
+	for(int i = 1; i < nCeldas-1; i++){
 		random = rand() % 8 - 3;
 		celdasOca[i].sAccion(random);
 	}
