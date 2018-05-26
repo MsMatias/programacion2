@@ -15,14 +15,17 @@ class jugador{
 	private:
 		char *nombre;
 		int posicion;
+		int jugadas;
 		
 	public:
-		jugador(){ posicion = 0; };
+		jugador(){ posicion = 0; jugadas = 0; };
 		void sNombre(const char*);
 		char* gNombre();
 		int posTablero();
 		int jugar();
 		void sPosicion(int);
+		void operator++(int);
+		int gJugadas();
 		
 };
 
@@ -60,6 +63,14 @@ int jugador::jugar(){
 
 void jugador::sPosicion(int p){
 	posicion = p;
+}
+
+void jugador::operator++(int){
+	jugadas++;
+}
+
+int jugador::gJugadas(){
+	return jugadas;
 }
 
 //CLASE CELDA
@@ -183,7 +194,7 @@ int oca::iniciar(){
 	
 	/* Imprimimos a los jugadores */
 	for(int i = 0; i < nJugadores; i++){
-		cout<<(i+1)<<")- "<<jugadores[i].gNombre()<<endl;
+		cout<<(i+1)<<")- "<<jugadores[i].gNombre()<<" cantidad de tiros: "<<jugadores[i].gJugadas()<<endl;
 	}
 	
 	cout<<endl;
@@ -191,10 +202,6 @@ int oca::iniciar(){
 	cout<<"=========================="<<endl;
 	cout<<"==== Tablero de juego ===="<<endl;
 	cout<<"=========================="<<endl<<endl;
-	
-	/*for(int j = 0; j < nJugadores; j++){
-			cout<<jugadores[i].posTablero()<<endl;
-		}*/
 	
 	/* Imprimimos el tablero con los jugadores en sus respectivas posiciones */
 	for(int i = 0; i < nCeldas; i++){
@@ -220,7 +227,12 @@ int oca::iniciar(){
 	posActual = jugadores[turno].posTablero();
 	
 	if((k = getch()) == 13){
+		
+		//Incrementa una jugada
+		jugadores[turno]++;
+		
 		dado = jugadores[turno].jugar();
+		
 		cout<<"El jugador se mueve  "<<dado<<" posiciones"<<endl;
 		posActual += dado;
 		
