@@ -1,9 +1,10 @@
-/*
-
-*/
-
 #include <iostream>
-using namespace std;
+#include <stdlib.h> 
+#include <stdio.h> 
+#include <time.h> 
+#include <conio.h>
+#include <string.h>
+
 class fecha {
 	private: //no podran ser modificado
 		int d;
@@ -105,8 +106,15 @@ int fecha::getanio()
 			return R;
 		}
 	} 
+	
+using namespace std;	
+	
 int main ()
 {
+	fecha* fasd;
+	
+	fasd = new fecha[20];
+	
 	int d1,m1,a1,dd;
 	cout<<"ingrese dia"<<endl;
 	cin>>d1;
