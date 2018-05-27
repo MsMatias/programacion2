@@ -121,32 +121,32 @@ int fecha::getanio()
 
 class persona{
 	private:
-		int DNI;
+		long DNI;
 		char* Nombre;
 		char* Apellido;
-		int tel_fijo;
-		unsigned long int tel_movil;
+		long tel_fijo;
+		long tel_movil;
 		
 	public:
 		persona();
-		void sDNI(int);
+		void sDNI(long);
 		void sNombre(const char* p);
 		void sApellido(const char* p);
-		void stel_fijo(int);
-		void stel_movil(unsigned long int);
+		void stel_fijo(long);
+		void stel_movil(long);
 		
-		int gDNI();
+		long gDNI();
 		char* gNombre();
 		char* gApellido();
-		int gtel_fijo();
-		unsigned long int gtel_movil();
+		long gtel_fijo();
+		long gtel_movil();
 		
 };
 
 persona::persona(){}
 
-void persona::sDNI(int a){
-	int DNI = a;
+void persona::sDNI(long a){
+	long DNI = a;
 }
 
 void persona::sNombre(const char* p){
@@ -173,15 +173,15 @@ void persona::sApellido(const char* p){
 	}
 }
 
-void persona::stel_fijo(int fijo){
-	int tel_fijo = fijo;
+void persona::stel_fijo(long fijo){
+	long tel_fijo = fijo;
 }
 
-void persona::stel_movil(unsigned long int movil){
-	int tel_movil = movil;
+void persona::stel_movil(long movil){
+	long tel_movil = movil;
 }
 
-int persona::gDNI(){
+long persona::gDNI(){
 	return DNI;
 }
 
@@ -193,11 +193,11 @@ char* persona::gApellido(){
 	return Apellido;
 }
 
-int persona::gtel_fijo(){
+long persona::gtel_fijo(){
 	return tel_fijo;
 }
 
-unsigned long int persona::gtel_movil(){
+long persona::gtel_movil(){
 	return tel_movil;
 }
 
@@ -340,9 +340,9 @@ int main(int argc, char** argv) {
 	persona solicitante;
 	char* nombre;
 	char* apellido;
-	int dni;
-	unsigned long int tFijo;
-	unsigned long int tMovil;
+	long dni;
+	long tFijo;
+	long tMovil;
 	char verificacion;
 	int nPrestamo;
 	float Valor;
@@ -400,7 +400,7 @@ int main(int argc, char** argv) {
 	do{
 		system("CLS");
 		cabecera();
-		cout<<"Ingrese el numero de prestamo: ";
+		cout<<"Ingrese el numero de indentificacion de prestamo: ";
 		cin>>nPrestamo;		
 	}while(nPrestamo < 1);	
 	
@@ -436,21 +436,21 @@ int main(int argc, char** argv) {
 	do{
 		system("CLS");
 		cabecera();
-		cout<<"Ingrese dia de la autorizacion: ";
+		cout<<"Ingrese el DIA de la autorizacion: ";
 		cin>>dia;
 	}while(dia < 1 || dia > 31);
 		
 	do{
 		system("CLS");
 		cabecera();
-		cout<<"Ingrese mes de la autorizacion: ";
+		cout<<"Ingrese el MES de la autorizacion: ";
 		cin>>mes;
 	}while(mes < 1 || mes > 12);	
 	
 	do{
 		system("CLS");
 		cabecera();
-		cout<<"Ingrese año de la autorizacion: ";
+		cout<<"Ingrese ANIO de la autorizacion: ";
 		cin>>anio;
 	}while(anio < 1 || anio > 9999);
 	
