@@ -242,9 +242,8 @@ class prestamo {
 prestamo::prestamo(persona _solicitante){	
 	solicitante = _solicitante;
 	std::ofstream archivo_salida ("file.txt", std::ofstream::out);
-	
-	//archivo_salida << "prueba archivo" << endl;     // Se escribe en el archivo
-    //archivo_salida.close();
+	archivo_salida << "prueba archivo" << endl;     // Se escribe en el archivo
+    archivo_salida.close();
 }
 
 void prestamo::snPrestamo(int n){
@@ -490,8 +489,7 @@ int main(int argc, char** argv) {
 	
 	prestamo1.ejecutarCuotas();
 	prestamo1.VerCuotas();
-		//archivo_salida << "prueba archivo" << endl;     // Se escribe en el archivo
-    //archivo_salida.close();
+
 	return 0;
 }
 
