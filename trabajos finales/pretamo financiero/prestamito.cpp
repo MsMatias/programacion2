@@ -125,7 +125,7 @@ class persona{
 		char* Nombre;
 		char* Apellido;
 		long tel_fijo;
-		long tel_movil;
+		unsigned long long tel_movil;
 		
 	public:
 		persona();
@@ -133,13 +133,13 @@ class persona{
 		void sNombre(const char* p);
 		void sApellido(const char* p);
 		void stel_fijo(long);
-		void stel_movil(long);
+		void stel_movil(unsigned long long);
 		
 		long gDNI();
 		char* gNombre();
 		char* gApellido();
 		long gtel_fijo();
-		long gtel_movil();
+		unsigned long long gtel_movil();
 		
 };
 
@@ -177,8 +177,8 @@ void persona::stel_fijo(long fijo){
 	long tel_fijo = fijo;
 }
 
-void persona::stel_movil(long movil){
-	long tel_movil = movil;
+void persona::stel_movil(unsigned long long movil){
+	unsigned long long tel_movil = movil;
 }
 
 long persona::gDNI(){
@@ -197,7 +197,7 @@ long persona::gtel_fijo(){
 	return tel_fijo;
 }
 
-long persona::gtel_movil(){
+unsigned long long persona::gtel_movil(){
 	return tel_movil;
 }
 
@@ -342,13 +342,15 @@ int main(int argc, char** argv) {
 	char* apellido;
 	long dni;
 	long tFijo;
-	long tMovil;
+	unsigned long long tMovil;
 	char verificacion;
 	int nPrestamo;
 	float Valor;
 	float TasaInteres;
 	int nCuotas;
 	int dia, mes, anio;
+	int bandera = 0;
+	char resp, s, n;
 	
 	do{
 	
@@ -382,18 +384,23 @@ int main(int argc, char** argv) {
 	
 	cout<<"Datos del solicitante ingresados:"<<endl;
 	cout<<"Apellido: "<<apellido<<endl;
-	cout<<"Nombre: "<<nombre<<endl;
+	cout<<"Nombre:   "<<nombre<<endl;
 	cout<<"DNI: "<<dni<<endl;
-	cout<<"Telefono Fijo: "<<tFijo<<endl;
+	cout<<"Telefono Fijo:  "<<tFijo<<endl;
 	cout<<"Telefono Movil: "<<tMovil<<endl;
-	cout<<"Los datos estan correctos? S/N: ";
+	cout<<"Los datos son correctos? s/n: ";
+	cin>>resp;
 	
-	if((verificacion = getch()) == 's' || (verificacion = getch()) == 'S'){
-		break;
-	}
-	
-	
-	}while((verificacion = getch()) == 'n' || (verificacion = getch()) == 'N');	
+	if(resp != 's' && resp!='n'){
+        cout<<"\nIngrese 's' o 'n' en minuscula por favor"<<endl;
+		cout<<"Presione enter para continuar...";
+        bandera =1;
+		getch();
+    }
+    if(resp == 's') break;
+	if(resp == 'n') bandera = 1;
+	}while(bandera == 1);
+		
 	
 	prestamo prestamo1(solicitante);	
 	
