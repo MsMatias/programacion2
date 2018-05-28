@@ -1,7 +1,9 @@
-/*TP1-I-04:
+/*
+TP1-I-04:
 Escriba un programa, que dada una hora del día en Horas, Minutos y Segundos
 calcule la hora correspondiente 15 segundos después. 
-(Validar la entrada de datos).*/
+(Validar la entrada de datos).
+*/
 
 #include<iostream>
 #include<conio.h>
