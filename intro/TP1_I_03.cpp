@@ -1,8 +1,8 @@
-/*-------------------------------------------------------
+/*
 TP1-I-03:
 Validar el día, mes y el año para una fecha suministrada 
 sabiendo que los años van desde 1960 hasta 2021. 
--------------------------------------------------------*/
+*/
 
 #include<iostream>
 #include<conio.h>
