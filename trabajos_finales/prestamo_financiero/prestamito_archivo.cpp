@@ -125,7 +125,7 @@ class persona{
 		long DNI;
 		char* Nombre;
 		char* Apellido;
-		long tel_fijo;
+		unsigned long long tel_fijo;
 		unsigned long long tel_movil;
 		
 	public:
@@ -133,13 +133,13 @@ class persona{
 		void sDNI(long);
 		void sNombre(const char* p);
 		void sApellido(const char* p);
-		void stel_fijo(long);
+		void stel_fijo(unsigned long long);
 		void stel_movil(unsigned long long);
 		
 		long gDNI();
 		char* gNombre();
 		char* gApellido();
-		long gtel_fijo();
+		unsigned long long gtel_fijo();
 		unsigned long long gtel_movil();
 		
 };
@@ -174,7 +174,7 @@ void persona::sApellido(const char* p){
 	}
 }
 
-void persona::stel_fijo(long fijo){
+void persona::stel_fijo(unsigned long long fijo){
 	long tel_fijo = fijo;
 }
 
@@ -194,7 +194,7 @@ char* persona::gApellido(){
 	return Apellido;
 }
 
-long persona::gtel_fijo(){
+unsigned long long persona::gtel_fijo(){
 	return tel_fijo;
 }
 
@@ -234,16 +234,14 @@ class prestamo {
 		fecha gfAutorizacion();
 		fecha gfEntrega();
 		void ejecutarCuotas();
+		void generarArchivo();
 		void VerCuotas();
 		
 };
 
 
 prestamo::prestamo(persona _solicitante){	
-	solicitante = _solicitante;
-	std::ofstream archivo_salida ("file.txt", std::ofstream::out);
-	archivo_salida << "prueba archivo" << endl;     // Se escribe en el archivo
-    archivo_salida.close();
+	solicitante = _solicitante;	
 }
 
 void prestamo::snPrestamo(int n){
@@ -318,10 +316,10 @@ fecha prestamo::gfEntrega(){
 void prestamo::ejecutarCuotas(){
 	
 	fPagos = new fecha[nCuotas];
-	
+		
 	for(int c = 0; c < nCuotas; c++){
 		fPagos[c] = fEntrega;
-		fPagos[c] = fPagos[c] + (30*(c+1));
+		fPagos[c] = fPagos[c] + (30*(c+1));			
 	}
 	
 	cout<<"Cuotas ejecutadas"<<endl;
@@ -335,12 +333,55 @@ void prestamo::VerCuotas(){
 		cout<<"Cuota N "<<(c+1)<<endl;
 		cout<<"Valor: "<<monto<<endl;
 		cout<<"Fecha de Pago: "<<fPagos[c].getdia()<<"/"<<fPagos[c].getmes()<<"/"<<fPagos[c].getanio()<<endl;
-		cout<<"---------------------------"<<endl;
-		
+		cout<<"---------------------------"<<endl;		
 	}
 }
 
+void prestamo::generarArchivo(){
+	char* archivo;
+	
+	archivo = new char[100];
+	
+	strcat(archivo, "prestamo ");	
+	strcat(archivo, solicitante.gApellido());
+	strcat(archivo, " ");
+	strcat(archivo, solicitante.gNombre());
+	strcat(archivo, ".txt");
+	
+	std::ofstream archivo_salida (archivo, std::ofstream::out);
+	
+	archivo_salida<<"Prestamo Personal "<<endl;
+	
+	archivo_salida<<"Datos del prestamo: "<<endl;
+	archivo_salida<<"===================="<<endl;
+	archivo_salida<<"-Numero de prestamo: "<<nPrestamo<<endl;
+	archivo_salida<<"-Valor del prestamo: $"<<Valor<<endl;
+	archivo_salida<<"-Tasa de interes: "<<TasaInteres<<"%"<<endl;
+	archivo_salida<<"-Fecha de Autorizacion: "<<gfAutorizacion().getdia()<<"/"<<gfAutorizacion().getmes()<<"/"<<gfAutorizacion().getanio()<<endl;
+	archivo_salida<<"-Fecha de Entrega: "<<gfEntrega().getdia()<<"/"<<gfEntrega().getmes()<<"/"<<gfEntrega().getanio()<<endl<<endl;
+	
+	archivo_salida<<"Datos del solicitante ingresados: "<<endl;
+	archivo_salida<<"=================================="<<endl;
+	archivo_salida<<"Apellido: "<<solicitante.gApellido()<<endl;
+	archivo_salida<<"Nombre:   "<<solicitante.gNombre()<<endl;
+	archivo_salida<<"DNI: "<<solicitante.gDNI()<<endl;
+	archivo_salida<<"Telefono Fijo:  "<<solicitante.gtel_fijo()<<endl;
+	archivo_salida<<"Telefono Movil: "<<solicitante.gtel_movil()<<endl;
+
+	
+	float monto = gValorInteres()/nCuotas;
+	
+	for(int c = 0; c < nCuotas; c++){
+
+		archivo_salida<<"Cuota N "<<(c+1)<<endl;
+		archivo_salida<<"Valor: "<<monto<<endl;
+		archivo_salida<<"Fecha de Pago: "<<fPagos[c].getdia()<<"/"<<fPagos[c].getmes()<<"/"<<fPagos[c].getanio()<<endl;
+		archivo_salida<<"---------------------------"<<endl;
 		
+	}
+		
+	archivo_salida.close();
+}	
 		
 
 void cabecera();
@@ -488,6 +529,7 @@ int main(int argc, char** argv) {
 	while((verificacion = getch()) != 13);
 	
 	prestamo1.ejecutarCuotas();
+	prestamo1.generarArchivo();
 	prestamo1.VerCuotas();
 
 	return 0;
