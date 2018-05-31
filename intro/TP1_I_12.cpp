@@ -5,7 +5,6 @@ Solicitar al usuario un valor entero y decir si es capicúa.
 #include<iostream>
 #include<conio.h>
 using namespace std;
-
 int main(){
 	int num,aux,resto,numInv=0;
  	cout<<"Ingrese un numero: ";cin>>num;
