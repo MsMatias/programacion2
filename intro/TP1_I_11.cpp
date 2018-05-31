@@ -1,7 +1,8 @@
+/*
 TP1-I-11:
 Desarrollar un programa en el cual introduzca un número entero 
 positivo e invierta los dígitos del número. Mostrar en pantalla el número invertido.
-
+*/
 #include<iostream>
 #include<conio.h>
 using namespace std;
