@@ -122,31 +122,31 @@ int fecha::getanio()
 
 class persona{
 	private:
-		long DNI;
+		unsigned int DNI;
 		char* Nombre;
 		char* Apellido;
-		unsigned long long tel_fijo;
-		unsigned long long tel_movil;
+		unsigned long int tel_fijo;
+		unsigned long int tel_movil;
 		
 	public:
 		persona();
-		void sDNI(long);
+		void sDNI(unsigned int);
 		void sNombre(const char* p);
 		void sApellido(const char* p);
-		void stel_fijo(unsigned long long);
-		void stel_movil(unsigned long long);
+		void stel_fijo(unsigned long int);
+		void stel_movil(unsigned long int);
 		
-		long gDNI();
+		unsigned int gDNI();
 		char* gNombre();
 		char* gApellido();
-		unsigned long long gtel_fijo();
-		unsigned long long gtel_movil();
+		unsigned long int gtel_fijo();
+		unsigned long int gtel_movil();
 		
 };
 
 persona::persona(){}
 
-void persona::sDNI(long a){
+void persona::sDNI(unsigned int a){
 	long DNI = a;
 }
 
@@ -174,15 +174,15 @@ void persona::sApellido(const char* p){
 	}
 }
 
-void persona::stel_fijo(unsigned long long fijo){
-	long tel_fijo = fijo;
+void persona::stel_fijo(unsigned long int fijo){
+	tel_fijo = fijo;
 }
 
-void persona::stel_movil(unsigned long long movil){
-	unsigned long long tel_movil = movil;
+void persona::stel_movil(unsigned long int movil){
+	tel_movil = movil;
 }
 
-long persona::gDNI(){
+unsigned int persona::gDNI(){
 	return DNI;
 }
 
@@ -194,11 +194,11 @@ char* persona::gApellido(){
 	return Apellido;
 }
 
-unsigned long long persona::gtel_fijo(){
+unsigned long int persona::gtel_fijo(){
 	return tel_fijo;
 }
 
-unsigned long long persona::gtel_movil(){
+unsigned long int persona::gtel_movil(){
 	return tel_movil;
 }
 
@@ -340,7 +340,13 @@ void prestamo::VerCuotas(){
 void prestamo::generarArchivo(){
 	char* archivo;
 	
-	archivo = new char[100];
+	archivo = new char[50];
+	
+	int n = strlen(archivo);
+	
+	for(int i=0;i<n;i++){
+		*(archivo+i) = '\0';
+	}
 	
 	strcat(archivo, "prestamo ");	
 	strcat(archivo, solicitante.gApellido());
@@ -391,9 +397,9 @@ int main(int argc, char** argv) {
 	persona solicitante;
 	char* nombre;
 	char* apellido;
-	long dni;
-	long tFijo;
-	unsigned long long tMovil;
+	unsigned int dni;
+	unsigned long int tFijo;
+	unsigned long int tMovil;
 	char verificacion;
 	int nPrestamo;
 	float Valor;
