@@ -370,7 +370,7 @@ void prestamo::generarArchivo(){
 	archivo_salida<<"=================================="<<endl;
 	archivo_salida<<"Apellido: "<<solicitante.gApellido()<<endl;
 	archivo_salida<<"Nombre:   "<<solicitante.gNombre()<<endl;
-	archivo_salida<<"DNI: "<<solicitante.gDNI()<<endl;
+	archivo_salida<<"DNI:      "<<solicitante.gDNI()<<endl;
 	archivo_salida<<"Telefono Fijo:  "<<solicitante.gtel_fijo()<<endl;
 	archivo_salida<<"Telefono Movil: "<<solicitante.gtel_movil()<<endl;
 
@@ -419,20 +419,15 @@ int main(int argc, char** argv) {
 	apellido = (char *) malloc(LARGO_NOMBRE);		
 		
 	cout<<"Defina los datos del solicitante"<<endl;
-	cout<<"Apellido: ";
-	cin>>apellido;
+	cout<<"Apellido: ";cin>>apellido;
 	solicitante.sApellido(apellido);
-	cout<<"Nombre: ";
-	cin>>nombre;
+	cout<<"Nombre:   ";cin>>nombre;
 	solicitante.sNombre(nombre);
-	cout<<"DNI: ";
-	cin>>dni;
+	cout<<"DNI:      ";cin>>dni;
 	solicitante.sDNI(dni);
-	cout<<"Telefono Fijo: ";
-	cin>>tFijo;
+	cout<<"Telefono Fijo:  ";cin>>tFijo;
 	solicitante.stel_fijo(tFijo);
-	cout<<"Telefono Movil: ";
-	cin>>tMovil;
+	cout<<"Telefono Movil: ";cin>>tMovil;
 	solicitante.stel_movil(tMovil);
 	
 	system("CLS");
@@ -442,7 +437,7 @@ int main(int argc, char** argv) {
 	cout<<"Datos del solicitante ingresados:"<<endl;
 	cout<<"Apellido: "<<apellido<<endl;
 	cout<<"Nombre:   "<<nombre<<endl;
-	cout<<"DNI: "<<dni<<endl;
+	cout<<"DNI: 	 "<<dni<<endl;
 	cout<<"Telefono Fijo:  "<<tFijo<<endl;
 	cout<<"Telefono Movil: "<<tMovil<<endl;
 	cout<<"Los datos son correctos? s/n: ";
