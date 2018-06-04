@@ -421,8 +421,8 @@ int main(int argc, char** argv) {
 	
 	cabecera();	
 	
-	nombre = (char *) malloc(LARGO_NOMBRE); //asigna el número especificado de bytes
-	apellido = (char *) malloc(LARGO_NOMBRE);		
+	nombre = new char[LARGO_NOMBRE]; //asigna el número especificado de bytes
+	apellido = new char[LARGO_NOMBRE];		
 		
 	cout<<"Defina los datos del solicitante"<<endl;
 	cout<<"Apellido: ";cin>>apellido;

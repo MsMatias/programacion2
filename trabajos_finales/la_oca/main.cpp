@@ -150,7 +150,7 @@ int oca::iniciarJugadores(int j){
 		jugadores = new jugador[nJugadores];
 		int c;
 		
-		nombre = (char *) malloc(LARGO_NOMBRE);  //MALLOC: asigna el número especificado de bytes
+		nombre = new char[LARGO_NOMBRE];  //asigna el número especificado de bytes
 				
 		/* Guardamos los nombres de cada jugador */
 		for(int i = 0; i < nJugadores; i++){
