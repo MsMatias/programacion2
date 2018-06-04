@@ -5,6 +5,7 @@
 #include <stdio.h> 
 #include <windows.h>
 #include <fstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -20,8 +21,8 @@ class fecha {
 		int m;
 		int a;
 	public: //valores modificables
-	fecha();
-	fecha (int,int,int);//constructor
+		fecha();
+		fecha (int,int,int);//constructor
 		void setdia (int d); //retorno setdia. modifica
 		int getdia(); //para mostrar dato
 		void setmes (int m); //set (sentencia)
@@ -36,12 +37,14 @@ class fecha {
 		void operator-- ();
 		fecha operator +(int dd);//a una fecha sumarle dias con parametros
 		fecha operator -(int dd);
-	};//declaramos el prototipo
+	};//decla
+	
 	fecha::fecha(){
 		d=1;
 		m=1;
 		a=1900;//estos son los valores que le ponemos por defecto al objeto
 	}
+	
 	fecha::fecha(int dia,int mes,int anio){
 		d=dia;
 		m=mes;
@@ -61,8 +64,7 @@ int fecha::getmes()
 int fecha::getanio()
 	{return a;}
 
-	int fecha:: valida ()
-		{
+	int fecha:: valida (){
 			if(d<1||d>31||m<1||m>12)
 			return 0;//el return sale de la funcio
 			if(d>30&&(m==4||m==6||m==9||m==11))
@@ -71,6 +73,7 @@ int fecha::getanio()
 			return 0;
 			return 1;//si llego hasta aca esta bien
 		}
+	
 	void fecha::operator++ (){
 		d++;
 		if(!valida())//no es valido
@@ -122,7 +125,7 @@ int fecha::getanio()
 
 class persona{
 	private:
-		unsigned int DNI;
+		unsigned long int DNI;
 		char* Nombre;
 		char* Apellido;
 		unsigned long int tel_fijo;
@@ -130,13 +133,13 @@ class persona{
 		
 	public:
 		persona();
-		void sDNI(unsigned int);
+		void sDNI(unsigned long int);
 		void sNombre(const char* p);
 		void sApellido(const char* p);
 		void stel_fijo(unsigned long int);
 		void stel_movil(unsigned long int);
 		
-		unsigned int gDNI();
+		unsigned long int gDNI();
 		char* gNombre();
 		char* gApellido();
 		unsigned long int gtel_fijo();
@@ -146,8 +149,8 @@ class persona{
 
 persona::persona(){}
 
-void persona::sDNI(unsigned int a){
-	long DNI = a;
+void persona::sDNI(unsigned long int a){
+	DNI = a;
 }
 
 void persona::sNombre(const char* p){
@@ -182,7 +185,7 @@ void persona::stel_movil(unsigned long int movil){
 	tel_movil = movil;
 }
 
-unsigned int persona::gDNI(){
+unsigned long int persona::gDNI(){
 	return DNI;
 }
 
@@ -210,7 +213,7 @@ class prestamo {
 	private:
 		int nPrestamo;
 		persona solicitante;
-		float Valor;
+		double Valor;
 		float TasaInteres;
 		int nCuotas;
 		fecha fAutorizacion;
@@ -223,9 +226,9 @@ class prestamo {
 		
 		void snPrestamo(int n);
 		int gnPrestamo();
-		void sValor(float v);
-		float gValorSinInteres();
-		float gValorInteres();
+		void sValor(double v);
+		double gValorSinInteres();
+		double gValorInteres();
 		void sTasaInteres(float i);
 		float gTasaInteres();
 		void snCuotas(int c);
@@ -257,7 +260,7 @@ int prestamo::gnPrestamo(){
 	return nPrestamo;
 }
 
-void prestamo::sValor(float v){
+void prestamo::sValor(double v){
 	if(v > 0){
 		Valor = v;
 		cout<<"Valor aisgnado!"<<endl;
@@ -266,11 +269,11 @@ void prestamo::sValor(float v){
 	}
 }
 
-float prestamo::gValorSinInteres(){
+double prestamo::gValorSinInteres(){
 	return Valor;
 }
 
-float prestamo::gValorInteres(){
+double prestamo::gValorInteres(){
 	return Valor+(Valor*TasaInteres/10);
 }
 
@@ -296,11 +299,10 @@ int prestamo::gnCuotas(){
 	return nCuotas;
 }
 
-void prestamo::definirFechas(int d, int m, int a){	
+void prestamo::definirFechas(int d, int m, int a){
 	fAutorizacion.setdia(d);
 	fAutorizacion.setmes(m);
 	fAutorizacion.setanio(a);
-	
 	fEntrega = fAutorizacion;
 	fEntrega = fEntrega + 7;
 }
@@ -361,6 +363,8 @@ void prestamo::generarArchivo(){
 	archivo_salida<<"Datos del prestamo: "<<endl;
 	archivo_salida<<"===================="<<endl;
 	archivo_salida<<"-Numero de prestamo: "<<nPrestamo<<endl;
+	archivo_salida<<fixed;	
+	archivo_salida<<setprecision(2);
 	archivo_salida<<"-Valor del prestamo: $"<<Valor<<endl;
 	archivo_salida<<"-Tasa de interes: "<<TasaInteres<<"%"<<endl;
 	archivo_salida<<"-Fecha de Autorizacion: "<<gfAutorizacion().getdia()<<"/"<<gfAutorizacion().getmes()<<"/"<<gfAutorizacion().getanio()<<endl;
@@ -373,7 +377,8 @@ void prestamo::generarArchivo(){
 	archivo_salida<<"DNI:      "<<solicitante.gDNI()<<endl;
 	archivo_salida<<"Telefono Fijo:  "<<solicitante.gtel_fijo()<<endl;
 	archivo_salida<<"Telefono Movil: "<<solicitante.gtel_movil()<<endl;
-
+	
+	archivo_salida<<"=================================="<<endl;
 	
 	float monto = gValorInteres()/nCuotas;
 	
@@ -397,25 +402,26 @@ int main(int argc, char** argv) {
 	persona solicitante;
 	char* nombre;
 	char* apellido;
-	unsigned int dni;
+	unsigned long int dni;
 	unsigned long int tFijo;
 	unsigned long int tMovil;
 	char verificacion;
 	int nPrestamo;
-	float Valor;
+	double Valor;
 	float TasaInteres;
 	int nCuotas;
 	int dia, mes, anio;
 	int bandera = 0;
 	char resp, s, n;
 	
+	//Menu principal
 	do{
 	
 	system("CLS");
 	
 	cabecera();	
 	
-	nombre = (char *) malloc(LARGO_NOMBRE);
+	nombre = (char *) malloc(LARGO_NOMBRE); //asigna el número especificado de bytes
 	apellido = (char *) malloc(LARGO_NOMBRE);		
 		
 	cout<<"Defina los datos del solicitante"<<endl;
@@ -443,14 +449,14 @@ int main(int argc, char** argv) {
 	cout<<"Los datos son correctos? s/n: ";
 	cin>>resp;
 	
-	if(resp != 's' && resp!='n'){
+	while(resp != 's' && resp!='n'){
         cout<<"\nIngrese 's' o 'n' en minuscula por favor"<<endl;
 		cout<<"Presione enter para continuar...";
         bandera =1;
-		getch();
+		cin>>resp;
     }
     if(resp == 's') break;
-	if(resp == 'n') bandera = 1;
+	if(resp == 'n') bandera = 1;	
 	}while(bandera == 1);
 		
 	
@@ -519,8 +525,10 @@ int main(int argc, char** argv) {
 	
 	cabecera();
 	
-	cout<<"-Datos del prestamo: "<<endl;
+	cout<<".:Datos del prestamo:."<<endl;
 	cout<<"-Numero de prestamo: "<<nPrestamo<<endl;
+	cout<<fixed;
+	cout<<setprecision(2);
 	cout<<"-Valor del prestamo: $"<<Valor<<endl;
 	cout<<"-Tasa de interes: "<<TasaInteres<<"%"<<endl;
 	cout<<"-Fecha de Autorizacion: "<<prestamo1.gfAutorizacion().getdia()<<"/"<<prestamo1.gfAutorizacion().getmes()<<"/"<<prestamo1.gfAutorizacion().getanio()<<endl;
