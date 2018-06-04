@@ -8,9 +8,12 @@
 #define MIN_JUGADORES 2
 #define MAX_JUGADORES 5
 #define LARGO_NOMBRE 20
+#define MIN_CELDA 2
+#define MAX_CELDA 40
 
 using namespace std;
 
+//CLASE JUGADOR
 class jugador{
 	private:
 		char *nombre;
@@ -147,7 +150,7 @@ int oca::iniciarJugadores(int j){
 		jugadores = new jugador[nJugadores];
 		int c;
 		
-		nombre = (char *) malloc(LARGO_NOMBRE);
+		nombre = (char *) malloc(LARGO_NOMBRE);  //MALLOC: asigna el número especificado de bytes
 				
 		/* Guardamos los nombres de cada jugador */
 		for(int i = 0; i < nJugadores; i++){
@@ -163,7 +166,7 @@ int oca::iniciarJugadores(int j){
 	}
 }
 
-int oca::iniciar(){	
+int oca::iniciar(){
 	
 	//Verificamos que existan mas de 3 celdas en el tablero para iniciar
 	if(nCeldas < 3){
@@ -279,6 +282,7 @@ jugador oca::gJugador(int i){
 	return jugadores[i];
 }
 
+//MAIN
 int main(int argc, char** argv) {
 	
 	int c,j;
@@ -291,9 +295,9 @@ int main(int argc, char** argv) {
 	
 	do{	
 		cout <<'\r';
-		cout<<"Ingrese la cantidad de celdas que va a tener el tablero: ";
+		cout<<"Ingrese la cantidad de celdas que va a tener el tablero (min "<<MIN_CELDA<<" - max "<<MAX_CELDA<<") ";
 		cin>>c;
-	}while(c < 2 || c > 40);
+	}while(c < MIN_CELDA || c > MAX_CELDA); //Defino min y max cantidad de celdas.
 	
 	cout << "%" << '\r';
 				
@@ -301,7 +305,7 @@ int main(int argc, char** argv) {
 	
 	do{	
 		cout <<'\r';
-		cout<<"Ingrese la cantidad de jugadores (min 2 - max 5): ";
+		cout<<"Ingrese la cantidad de jugadores (min "<<MIN_JUGADORES<<" - max "<<MAX_JUGADORES<<"): ";
 		cin>>j;
 	}while(j < MIN_JUGADORES || j > MAX_JUGADORES);
 	
@@ -324,4 +328,3 @@ int main(int argc, char** argv) {
 	system("PAUSE");
 	return 0;
 }
-
