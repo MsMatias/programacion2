@@ -1,9 +1,9 @@
 /*
 TP1-I-16:
-El nÃºmero mÃ¡gico de una persona puede considerarse como la suma de las cifras de
-su dÃ­a de nacimiento, repitiendo el proceso hasta que la suma de las cifras devuelva
-un nÃºmero menor de 10. Leer la fecha de nacimiento de una persona, utilizando el
-formato aaaammdd (utilizando un Ãºnico entero) y calcular su nÃºmero mÃ¡gico.
+El número mágico de una persona puede considerarse como la suma de las cifras de
+su día de nacimiento, repitiendo el proceso hasta que la suma de las cifras devuelva
+un número menor de 10. Leer la fecha de nacimiento de una persona, utilizando el
+formato aaaammdd (utilizando un único entero) y calcular su número mágico.
 */
 
 #include<iostream>
