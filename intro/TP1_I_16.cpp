@@ -8,9 +8,7 @@ formato aaaammdd (utilizando un único entero) y calcular su número mágico.
 
 #include<iostream>
 #include<conio.h>
-
 using namespace std;
-
 int main(){
 	int f;
 	int s = 0;
@@ -21,8 +19,8 @@ int main(){
 	do{
 		s = s + f%10;  // 0+0     - 0+2    - 2+8     || 0+1     - 1+2    - 3+8
 		f = f/10;      // 1981082 - 198108 - 198110  || 1981082 - 198108   19810
-	}while(s<10);
-	cout<<"\nEl numero magico es: "<<s;
+	}while(s<10&&f!=0);
+	cout<<"\nEl numero magico es: "<<s<<endl;
 	getch();
 	return 0;
 }
